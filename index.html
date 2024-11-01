@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, [Her Name]!</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="overlay"></div> <!-- For background overlay -->
+    <header>
+        <h1>🎉 Happy Birthday, [Her Name]! 🎂</h1>
+        <p>Wishing you a day filled with love, joy, and unforgettable moments.</p>
+    </header>
+
+    <section id="countdown">
+        <h2>Countdown to Your Special Day</h2>
+        <div id="timer">
+            <div class="time-box">
+                <span id="days">0</span>
+                <div class="label">Days</div>
+            </div>
+            <div class="time-box">
+                <span id="hours">0</span>
+                <div class="label">Hours</div>
+            </div>
+            <div class="time-box">
+                <span id="minutes">0</span>
+                <div class="label">Minutes</div>
+            </div>
+            <div class="time-box">
+                <span id="seconds">0</span>
+                <div class="label">Seconds</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery">
+        <h2>Our Memories</h2>
+        <div class="gallery-container">
+            <img src="images/photo1.jpg" alt="Memory 1">
+            <img src="images/photo2.jpg" alt="Memory 2">
+            <img src="images/photo3.jpg" alt="Memory 3">
+            <!-- Add more images as needed -->
+        </div>
+    </section>
+
+    <!-- Special Message Section (Initially Hidden) -->
+    <section id="special-message" class="hidden">
+        <h2>Surprise!</h2>
+        <p>May your birthday be as wonderful and inspiring as you are. I love you more than words can express!</p>
+        <img src="images/surprise.jpg" alt="Surprise Image">
+    </section>
+
+    <footer>
+        <p>Created with ❤️ by [Your Name]</p>
+    </footer>
+
+    <!-- Confetti Animation -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <!-- Confetti Animation Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
+    <!-- Background Music -->
+    <audio id="background-music" src="music/favorite-song.mp3" loop></audio>
+
+    <!-- Special Birthday Song -->
+    <audio id="birthday-song" src="music/birthday-song.mp3"></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
