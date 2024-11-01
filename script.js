@@ -1,5 +1,55 @@
+// Initialize Fireworks (Will be started when the countdown ends)
+let fireworksInstance;
+const fireworksCanvas = document.getElementById('fireworks-canvas');
+
+function startFireworks() {
+    fireworksInstance = new Fireworks(fireworksCanvas, {
+        speed: 3,
+        acceleration: 1.05,
+        friction: 0.98,
+        gravity: 1.5,
+        particles: 200,
+        trace: 3,
+        explosion: 5,
+        autoresize: true,
+        brightness: {
+            min: 50,
+            max: 80,
+            decay: {
+                min: 0.015,
+                max: 0.03
+            }
+        },
+        boundaries: {
+            x: 50,
+            y: 50,
+            width: fireworksCanvas.clientWidth,
+            height: fireworksCanvas.clientHeight
+        },
+        sound: {
+            enable: true,
+            files: [
+                'sounds/firework1.mp3',
+                'sounds/firework2.mp3',
+                'sounds/firework3.mp3'
+            ],
+            volume: {
+                min: 4,
+                max: 8
+            }
+        },
+    });
+    fireworksInstance.start();
+}
+
+function stopFireworks() {
+    if (fireworksInstance) {
+        fireworksInstance.stop();
+    }
+}
+
 // Countdown Timer
-const countdownDate = new Date("2024-11-03T05:15:00"); // Set to November 3, 2024, at 5:15 AM
+const countdownDate = new Date("2024-11-01T18:50:00"); // Set to November 2, 2024, at 5:15 AM
 console.log("Countdown Date:", countdownDate); // Debugging line
 
 const countdownFunction = setInterval(() => {
@@ -8,10 +58,19 @@ const countdownFunction = setInterval(() => {
 
     if (distance < 0) {
         clearInterval(countdownFunction);
-        document.getElementById("countdown").innerHTML = "<h2>🎉 Happy Birthday! 🎉</h2>";
+        // Remove the countdown section smoothly
+        const countdownSection = document.getElementById('countdown');
+        countdownSection.style.opacity = '0';
+        countdownSection.style.transition = 'opacity 1s ease-out';
+
+        setTimeout(() => {
+            countdownSection.style.display = 'none';
+            revealSpecialMessage(); // Reveal the special message
+        }, 1000);
+
         launchConfetti(); // Trigger confetti
+        startFireworks(); // Start fireworks
         playBirthdaySong(); // Play the special birthday song
-        revealSpecialMessage(); // Reveal the special message
         animateHeader(); // Animate the header
         return;
     }
@@ -44,7 +103,7 @@ function launchConfetti() {
             return clearInterval(interval);
         }
 
-        const particleCount = 100 * (timeLeft / duration);
+        const particleCount = 50 * (timeLeft / duration);
         confetti(Object.assign({}, defaults, { 
             particleCount, 
             origin: { x: randomInRange(0, 1), y: Math.random() - 0.2 }
@@ -135,7 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Pause Background Music
+// Pause/Play Background Music
 pauseBtn.addEventListener('click', () => {
     if (!music.paused) {
         music.pause();
