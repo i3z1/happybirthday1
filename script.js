@@ -49,7 +49,7 @@ function stopFireworks() {
 }
 
 // Countdown Timer
-const countdownDate = new Date("2024-11-01T18:50:00"); // Set to November 2, 2024, at 5:15 AM
+const countdownDate = new Date("2024-11-29T05:15:00");
 console.log("Countdown Date:", countdownDate); // Debugging line
 
 const countdownFunction = setInterval(() => {
