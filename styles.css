@@ -7,57 +7,64 @@
 
 body {
     font-family: 'Roboto', sans-serif;
-    background: url('images/background.jpg') no-repeat center center fixed;
-    background-size: cover;
-    color: #333;
+    color: #fff;
     line-height: 1.6;
     position: relative;
     min-height: 100vh;
     overflow-x: hidden;
 }
 
+/* Background Video Styling */
+#background-video {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -2;
+    transform: translate(-50%, -50%);
+    background-size: cover;
+    transition: 1s opacity;
+}
+
+/* Overlay for better readability */
 .overlay {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(0, 0, 0, 0.5); /* Dark overlay */
     z-index: -1;
+    pointer-events: none;
 }
 
 header {
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.2);
     color: #ff6f61;
     padding: 80px 20px;
     text-align: center;
     font-family: 'Pacifico', cursive;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    margin-bottom: 40px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    margin: 60px auto 40px;
     border-radius: 10px;
+    max-width: 800px;
+    backdrop-filter: blur(10px);
 }
 
 header h1 {
     font-size: 3.5em;
     margin-bottom: 20px;
     animation: fadeInDown 2s ease-out;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
 
 header p {
     font-size: 1.3em;
-    color: #555;
+    color: #f0f0f0;
     animation: fadeInUp 2s ease-out;
-}
-
-/* Enhanced "Happy Birthday" Animations */
-header h1 {
-    position: relative;
-    animation: shake 0.5s infinite alternate;
-}
-
-@keyframes shake {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(3deg); }
 }
 
 section {
@@ -68,11 +75,12 @@ section {
 
 #countdown {
     text-align: center;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.1);
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
     margin-bottom: 40px;
+    backdrop-filter: blur(5px);
 }
 
 #countdown h2 {
@@ -81,6 +89,7 @@ section {
     color: #ff6f61;
     margin-bottom: 20px;
     animation: fadeInDown 2s ease-out;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
 }
 
 #timer {
@@ -92,17 +101,19 @@ section {
 }
 
 .time-box {
-    background: #fff;
+    background: rgba(255, 255, 255, 0.2);
     padding: 20px 15px;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
     width: 100px;
     text-align: center;
-    transition: transform 0.3s;
+    transition: transform 0.3s, background 0.3s;
+    backdrop-filter: blur(5px);
 }
 
 .time-box:hover {
     transform: scale(1.1);
+    background: rgba(255, 255, 255, 0.3);
 }
 
 .time-box span {
@@ -110,20 +121,22 @@ section {
     font-size: 2.5em;
     color: #ff6f61;
     margin-bottom: 5px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 
 .time-box .label {
     font-size: 1em;
-    color: #555;
+    color: #f0f0f0;
 }
 
 #gallery {
     text-align: center;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.1);
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
     margin-bottom: 40px;
+    backdrop-filter: blur(5px);
 }
 
 #gallery h2 {
@@ -132,6 +145,7 @@ section {
     color: #ff6f61;
     margin-bottom: 20px;
     animation: fadeInDown 2s ease-out;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
 }
 
 .gallery-container {
@@ -147,24 +161,27 @@ section {
     height: 200px;
     object-fit: cover;
     border-radius: 10px;
-    transition: transform 0.3s, opacity 0.3s;
+    transition: transform 0.3s, opacity 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
 }
 
 .gallery-container img:hover {
     transform: scale(1.05);
-    opacity: 0.8;
+    opacity: 0.9;
+    box-shadow: 0 6px 8px rgba(0,0,0,0.3);
 }
 
 /* Special Message Section */
 #special-message {
     text-align: center;
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.15);
     padding: 40px 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
     margin: 40px auto;
     max-width: 800px;
     animation: fadeInUp 2s ease-out;
+    backdrop-filter: blur(5px);
 }
 
 #special-message h2 {
@@ -173,11 +190,12 @@ section {
     color: #ff6f61;
     margin-bottom: 20px;
     animation: bounce 1s infinite;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
 
 #special-message p {
     font-size: 1.5em;
-    color: #555;
+    color: #f0f0f0;
     margin-bottom: 30px;
 }
 
@@ -186,12 +204,14 @@ section {
     max-width: 90%;
     height: auto;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-    transition: transform 0.3s;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    transition: transform 0.3s, opacity 0.3s, box-shadow 0.3s;
 }
 
 #special-message img:hover {
     transform: scale(1.05);
+    opacity: 0.95;
+    box-shadow: 0 6px 8px rgba(0,0,0,0.4);
 }
 
 /* Bounce Animation for Special Message Heading */
@@ -221,16 +241,44 @@ section {
 footer {
     text-align: center;
     padding: 20px;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.2);
     color: #ff6f61;
     position: relative;
     width: 100%;
-    box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 -2px 4px rgba(0,0,0,0.3);
     border-top: 1px solid #ddd;
     font-size: 1em;
     font-family: 'Roboto', sans-serif;
+    backdrop-filter: blur(5px);
 }
 
+/* Audio Controls Styling */
+.audio-controls {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1001;
+    display: flex;
+    gap: 10px;
+}
+
+.audio-controls button {
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: rgba(255, 111, 97, 0.8);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.audio-controls button:hover {
+    background-color: rgba(230, 91, 80, 0.9);
+    transform: scale(1.05);
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
     header h1 {
         font-size: 2.5em;
@@ -261,6 +309,12 @@ footer {
     #special-message img {
         width: 80%;
     }
+
+    .audio-controls {
+        flex-direction: column;
+        right: 10px;
+        bottom: 10px;
+    }
 }
 
 /* Animations */
@@ -284,23 +338,4 @@ footer {
         opacity: 1;
         transform: translateY(0);
     }
-}
-
-/* Style for Fallback Play Buttons */
-button {
-    padding: 20px 40px;
-    font-size: 1.5em;
-    background-color: #ff6f61;
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    z-index: 1000;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-    transition: background-color 0.3s, transform 0.3s;
-}
-
-button:hover {
-    background-color: #e65b50;
-    transform: scale(1.05);
 }

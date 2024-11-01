@@ -1,5 +1,5 @@
 // Countdown Timer
-const countdownDate = new Date("2024-11-03T05:15:00"); // Set to November 1, 2024, at 5:15 AM
+const countdownDate = new Date("2024-11-03T05:15:00"); // Set to November 3, 2024, at 5:15 AM
 console.log("Countdown Date:", countdownDate); // Debugging line
 
 const countdownFunction = setInterval(() => {
@@ -28,7 +28,7 @@ const countdownFunction = setInterval(() => {
 
 // Confetti Function
 function launchConfetti() {
-    const duration = 5 * 1000;
+    const duration = 10 * 1000;
     const animationEnd = Date.now() + duration;
     const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
 
@@ -43,8 +43,7 @@ function launchConfetti() {
             return clearInterval(interval);
         }
 
-        const particleCount = 50 * (timeLeft / duration);
-        // since particles fall down, start a bit higher than random
+        const particleCount = 100 * (timeLeft / duration);
         confetti(Object.assign({}, defaults, { 
             particleCount, 
             origin: { x: randomInRange(0, 1), y: Math.random() - 0.2 }
@@ -75,7 +74,7 @@ function playBirthdaySong() {
         playButton.style.borderRadius = '10px';
         playButton.style.cursor = 'pointer';
         playButton.style.zIndex = '1000';
-        playButton.style.boxShadow = '0 4px 6px rgba(0,0,0,0.2)';
+        playButton.style.boxShadow = '0 4px 6px rgba(0,0,0,0.3)';
         playButton.style.transition = 'background-color 0.3s, transform 0.3s';
 
         // Add hover effects
@@ -110,55 +109,81 @@ function revealSpecialMessage() {
     specialMessage.classList.add('show');
 }
 
-// Background Music
+// Background Music Controls
 const music = document.getElementById('background-music');
+const playPauseBtn = document.getElementById('play-pause-bg-music');
+const muteBtn = document.getElementById('mute-bg-music');
 
+// Play/Pause Background Music
+playPauseBtn.addEventListener('click', () => {
+    if (music.paused) {
+        music.play().then(() => {
+            playPauseBtn.innerText = "🎵 Pause Music";
+        }).catch((error) => {
+            console.log("Autoplay prevented. Please interact with the page to play music.");
+        });
+    } else {
+        music.pause();
+        playPauseBtn.innerText = "🎵 Play Music";
+    }
+});
+
+// Mute/Unmute Background Music
+muteBtn.addEventListener('click', () => {
+    music.muted = !music.muted;
+    muteBtn.innerText = music.muted ? "🔇 Unmute" : "🔊 Mute";
+});
+
+// Attempt to play background music automatically
 document.addEventListener('DOMContentLoaded', () => {
-    // Attempt to play background music automatically
     music.play().then(() => {
         console.log("Background music is playing.");
+        playPauseBtn.innerText = "🎵 Pause Music";
     }).catch((error) => {
-        console.log("Autoplay prevented for background music. Creating a fallback button to play the music.");
+        console.log("Autoplay prevented for background music. User interaction required.");
 
-        // Create a temporary button to trigger audio playback
+        // Optionally, prompt the user to play music
+        const playMusicPrompt = document.createElement('div');
+        playMusicPrompt.classList.add('play-music-prompt');
+
+        const promptText = document.createElement('p');
+        promptText.innerText = "🎵 Click the button below to play background music 🎵";
+
         const playMusicButton = document.createElement('button');
-        playMusicButton.innerText = "🎵 Play Background Music 🎵";
-        playMusicButton.style.position = 'fixed';
-        playMusicButton.style.top = '60%';
-        playMusicButton.style.left = '50%';
-        playMusicButton.style.transform = 'translate(-50%, -50%)';
-        playMusicButton.style.padding = '20px 40px';
-        playMusicButton.style.fontSize = '1.5em';
+        playMusicButton.innerText = "▶️ Play Music";
+        playMusicButton.style.padding = '10px 20px';
+        playMusicButton.style.fontSize = '1em';
         playMusicButton.style.backgroundColor = '#ff6f61';
         playMusicButton.style.color = '#fff';
         playMusicButton.style.border = 'none';
-        playMusicButton.style.borderRadius = '10px';
+        playMusicButton.style.borderRadius = '5px';
         playMusicButton.style.cursor = 'pointer';
-        playMusicButton.style.zIndex = '1000';
-        playMusicButton.style.boxShadow = '0 4px 6px rgba(0,0,0,0.2)';
         playMusicButton.style.transition = 'background-color 0.3s, transform 0.3s';
 
         // Add hover effects
         playMusicButton.addEventListener('mouseenter', () => {
             playMusicButton.style.backgroundColor = '#e65b50';
-            playMusicButton.style.transform = 'translate(-50%, -50%) scale(1.05)';
+            playMusicButton.style.transform = 'scale(1.05)';
         });
 
         playMusicButton.addEventListener('mouseleave', () => {
             playMusicButton.style.backgroundColor = '#ff6f61';
-            playMusicButton.style.transform = 'translate(-50%, -50%) scale(1)';
+            playMusicButton.style.transform = 'scale(1)';
         });
 
         // Play music on button click
         playMusicButton.addEventListener('click', () => {
             music.play().then(() => {
                 console.log("Background music is playing after user interaction.");
-                document.body.removeChild(playMusicButton);
+                playMusicPrompt.remove();
+                playPauseBtn.innerText = "🎵 Pause Music";
             }).catch((err) => {
                 console.log("Failed to play background music:", err);
             });
         });
 
-        document.body.appendChild(playMusicButton);
+        playMusicPrompt.appendChild(promptText);
+        playMusicPrompt.appendChild(playMusicButton);
+        document.body.appendChild(playMusicPrompt);
     });
 });
