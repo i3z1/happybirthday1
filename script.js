@@ -12,6 +12,7 @@ const countdownFunction = setInterval(() => {
         launchConfetti(); // Trigger confetti
         playBirthdaySong(); // Play the special birthday song
         revealSpecialMessage(); // Reveal the special message
+        animateHeader(); // Animate the header
         return;
     }
 
@@ -109,22 +110,42 @@ function revealSpecialMessage() {
     specialMessage.classList.add('show');
 }
 
+// Animate Header
+function animateHeader() {
+    const header = document.getElementById('main-heading');
+    header.classList.add('animated-header');
+    setTimeout(() => {
+        header.classList.remove('animated-header');
+    }, 2000); // Duration matches the CSS animation duration
+}
+
 // Background Music Controls
 const music = document.getElementById('background-music');
-const playPauseBtn = document.getElementById('play-pause-bg-music');
+const pauseBtn = document.getElementById('pause-bg-music');
 const muteBtn = document.getElementById('mute-bg-music');
 
-// Play/Pause Background Music
-playPauseBtn.addEventListener('click', () => {
-    if (music.paused) {
-        music.play().then(() => {
-            playPauseBtn.innerText = "🎵 Pause Music";
-        }).catch((error) => {
-            console.log("Autoplay prevented. Please interact with the page to play music.");
-        });
-    } else {
+// Play Background Music Automatically with Fallback
+document.addEventListener('DOMContentLoaded', () => {
+    music.play().then(() => {
+        console.log("Background music is playing.");
+        pauseBtn.innerText = "⏸️ Pause Music";
+    }).catch((error) => {
+        console.log("Autoplay prevented for background music. User interaction required.");
+        // Optional: Notify user to interact to play music
+    });
+});
+
+// Pause Background Music
+pauseBtn.addEventListener('click', () => {
+    if (!music.paused) {
         music.pause();
-        playPauseBtn.innerText = "🎵 Play Music";
+        pauseBtn.innerText = "▶️ Play Music";
+    } else {
+        music.play().then(() => {
+            pauseBtn.innerText = "⏸️ Pause Music";
+        }).catch((error) => {
+            console.log("Failed to play background music:", error);
+        });
     }
 });
 
@@ -132,58 +153,4 @@ playPauseBtn.addEventListener('click', () => {
 muteBtn.addEventListener('click', () => {
     music.muted = !music.muted;
     muteBtn.innerText = music.muted ? "🔇 Unmute" : "🔊 Mute";
-});
-
-// Attempt to play background music automatically
-document.addEventListener('DOMContentLoaded', () => {
-    music.play().then(() => {
-        console.log("Background music is playing.");
-        playPauseBtn.innerText = "🎵 Pause Music";
-    }).catch((error) => {
-        console.log("Autoplay prevented for background music. User interaction required.");
-
-        // Optionally, prompt the user to play music
-        const playMusicPrompt = document.createElement('div');
-        playMusicPrompt.classList.add('play-music-prompt');
-
-        const promptText = document.createElement('p');
-        promptText.innerText = "🎵 Click the button below to play background music 🎵";
-
-        const playMusicButton = document.createElement('button');
-        playMusicButton.innerText = "▶️ Play Music";
-        playMusicButton.style.padding = '10px 20px';
-        playMusicButton.style.fontSize = '1em';
-        playMusicButton.style.backgroundColor = '#ff6f61';
-        playMusicButton.style.color = '#fff';
-        playMusicButton.style.border = 'none';
-        playMusicButton.style.borderRadius = '5px';
-        playMusicButton.style.cursor = 'pointer';
-        playMusicButton.style.transition = 'background-color 0.3s, transform 0.3s';
-
-        // Add hover effects
-        playMusicButton.addEventListener('mouseenter', () => {
-            playMusicButton.style.backgroundColor = '#e65b50';
-            playMusicButton.style.transform = 'scale(1.05)';
-        });
-
-        playMusicButton.addEventListener('mouseleave', () => {
-            playMusicButton.style.backgroundColor = '#ff6f61';
-            playMusicButton.style.transform = 'scale(1)';
-        });
-
-        // Play music on button click
-        playMusicButton.addEventListener('click', () => {
-            music.play().then(() => {
-                console.log("Background music is playing after user interaction.");
-                playMusicPrompt.remove();
-                playPauseBtn.innerText = "🎵 Pause Music";
-            }).catch((err) => {
-                console.log("Failed to play background music:", err);
-            });
-        });
-
-        playMusicPrompt.appendChild(promptText);
-        playMusicPrompt.appendChild(playMusicButton);
-        document.body.appendChild(playMusicPrompt);
-    });
 });

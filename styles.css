@@ -29,18 +29,19 @@ body {
     transition: 1s opacity;
 }
 
-/* Overlay for better readability */
+/* Pink Overlay for better readability */
 .overlay {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.5); /* Dark overlay */
+    background: rgba(255, 105, 180, 0.5); /* Pink overlay with transparency */
     z-index: -1;
     pointer-events: none;
 }
 
+/* Header Styling */
 header {
     background: rgba(255, 255, 255, 0.2);
     color: #ff6f61;
@@ -57,7 +58,7 @@ header {
 header h1 {
     font-size: 3.5em;
     margin-bottom: 20px;
-    animation: fadeInDown 2s ease-out;
+    animation: fadeInDown 2s ease-out, headerMove 2s ease-in-out;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
 
@@ -67,6 +68,14 @@ header p {
     animation: fadeInUp 2s ease-out;
 }
 
+/* Header Animation */
+@keyframes headerMove {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0); }
+}
+
+/* Countdown Section */
 section {
     padding: 40px 20px;
     max-width: 1200px;
@@ -129,6 +138,7 @@ section {
     color: #f0f0f0;
 }
 
+/* Gallery Section */
 #gallery {
     text-align: center;
     background: rgba(255, 255, 255, 0.1);
@@ -238,6 +248,7 @@ section {
     animation: fadeInUp 2s ease-out;
 }
 
+/* Footer Styling */
 footer {
     text-align: center;
     padding: 20px;
@@ -260,13 +271,17 @@ footer {
     z-index: 1001;
     display: flex;
     gap: 10px;
+    backdrop-filter: blur(5px);
+    padding: 10px;
+    border-radius: 10px;
+    background: rgba(255, 105, 180, 0.7); /* Pinkish background for controls */
 }
 
 .audio-controls button {
     padding: 10px 20px;
     font-size: 1em;
-    background-color: rgba(255, 111, 97, 0.8);
-    color: #fff;
+    background-color: rgba(255, 255, 255, 0.3);
+    color: #ff6f61;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -274,7 +289,7 @@ footer {
 }
 
 .audio-controls button:hover {
-    background-color: rgba(230, 91, 80, 0.9);
+    background-color: rgba(255, 255, 255, 0.5);
     transform: scale(1.05);
 }
 
