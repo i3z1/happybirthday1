@@ -1,5 +1,5 @@
 // Countdown Timer
-const countdownDate = new Date("2024-11-01T05:15:00"); // Set to November 1, 2024, at 5:15 AM
+const countdownDate = new Date("2024-11-03T05:15:00"); // Set to November 1, 2024, at 5:15 AM
 console.log("Countdown Date:", countdownDate); // Debugging line
 
 const countdownFunction = setInterval(() => {
